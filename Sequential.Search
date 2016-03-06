@@ -1,0 +1,21 @@
+int main() 
+{
+   int n,V;
+    cin>>V;
+    cin>>arr_size;
+    int *array=new int[arr_size];
+    for(int i=0;i<arr_size;i++)
+        {
+        cin>>array[i];
+    }
+    for(int i=0;i<arr_size;i++)
+        {
+        if(V==array[i])
+            {
+            cout<<i;
+            break;
+        }
+    }
+    return 0;
+}
+

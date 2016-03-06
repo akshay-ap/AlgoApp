@@ -1,0 +1,50 @@
+#include<iostream>
+using namespace std;
+#define SIZE 5
+int main()
+{
+int a[SIZE]={1,2,3,4,5};
+//int a[SIZE]={5,4,3,2,1};
+int b[5];
+int fr=-1,rear=-1;
+int data;
+//pass each element
+for(int i=0;i<SIZE;i++)
+{
+data=a[i];
+cout <<"passing "<<data<<endl;
+    if(fr==-1&&rear==-1)
+    {fr++;
+    rear++;
+    cout<<"rear is "<<rear<<endl;
+    b[i]=data;
+    cout<<"first element set "<<b[i]<<endl;
+    }
+ else
+    {
+    for(int i=0;i<rear;i++)
+    {cout<< "b[i] "<<b[i]<<endl;
+        if(data<=b[i])
+        {
+        for(int j=rear+1;j>i;j--)
+            {//moving elements
+            b[j]=b[j-1];
+                cout<<"moved "<<b[j-1]<<endl;
+            }
+            b[i]=data;
+            cout<<"inserted "<<b[i]<<endl;
+           break;
+        }
+        else {
+       continue;}
+    }
+rear++;
+cout<<"rear is "<<rear<<endl;
+    }//else end
+}
+
+// print sorted array
+for(int i=0;i<SIZE;i++)
+{cout<<b[i]<<" ";}
+return 0;
+}

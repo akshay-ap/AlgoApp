@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+int main()
+{   long int T;
+cin>>T;
+while(T!=0)
+{
+   long int num;
+   cin>>num;
+  long int numberDivisors = 1;
+
+  for (long int i = 2; i <= num; i++)
+  {
+    long int exponent = 0;
+    while (num % i == 0) {
+        exponent++;
+        num /= i;
+    }
+    numberDivisors *= (exponent+1);
+  }
+  cout << numberDivisors-1 <<endl;
+  T--;
+}
+    return 0;
+}

@@ -1,0 +1,151 @@
+//The Number of nodes is equal to MAX
+#include <iostream>
+#define MAX 6
+#define INFINITY 999
+#include<iomanip>
+using namespace std;
+class Graph
+{
+public :
+
+int G1[MAX][MAX];
+int MST[MAX][MAX];
+int cost[MAX][MAX];
+void display(int graph[MAX][MAX]);
+void prim(int x);
+Graph();
+void set_cost();
+};
+
+//graph func
+//begin set_cost
+void Graph::set_cost()
+{
+for(int i=0;i<MAX;i++)
+    {for(int j=0;j<MAX;j++)
+    {
+    if(G1[i][j]==0)
+    cost[i][j]=INFINITY;
+    else
+    cost[i][j]=G1[i][j];
+    }
+    }
+}
+//end set_cost
+Graph::Graph()
+{
+
+for(int i=0;i<MAX;i++)
+    {for(int j=0;j<MAX;j++)
+    {
+    cin>>G1[i][j];
+    }
+    }
+
+for(int i=0;i<MAX;i++)
+    {for(int j=0;j<MAX;j++)
+    {
+    MST[i][j]=0;
+    }
+    }
+//end Graph()
+}
+
+//begin display()
+void Graph::display(int graph[MAX][MAX])
+{
+for(int i=0;i<MAX;i++)
+    {for(int j=0;j<MAX;j++)
+    {
+   cout<<graph[i][j]<<" ";
+    }
+    cout<<endl;
+    }
+}
+
+//end display
+//begin prim
+void Graph::prim(int x)
+{
+int u,v,num_egde=MAX-1,min_dist,record[MAX][3];
+record[x][0]=1;
+record[x][1]=x;
+record[x][2]=0;
+cout<<"intitail visit"<<record[x][0]<<endl;
+//set record
+for(int i=0;i<MAX;i++)
+{	if(i==x)
+	{continue;}
+    record[i][0]=0;
+    record[i][1]=x;
+    record[i][2]=cost[x][i];
+}//end set record
+cout<<endl;
+cout<<"======================================="<<endl;
+cout<<"EDGES LEFT "<<num_egde<<endl;
+cout<<"RECORD ARRAY is "<<endl;
+cout<<setw(5)<<"egde"<<setw(5)<<"visit"<<setw(5)<<"from"<<setw(5)<<"distance"<<endl;
+
+    for(int i=0;i<MAX;i++)
+        cout<<setw(5)<<i+1<<setw(5)<<record[i][0]<<setw(5)<<record[i][1]<<setw(5)<<record[i][2]<<endl;
+cout<<"======================================="<<endl;
+num_egde=MAX-1;
+while(num_egde>0)
+{
+min_dist=INFINITY;
+//find min
+for (int i=0;i<MAX;i++)
+{
+ if(record[i][0]==0&&min_dist>record[i][2])
+   { min_dist=record[i][2];
+    v=i;}
+}
+u=record[v][1];
+//insert edge
+MST[u][v]=record[v][2];
+MST[v][u]=record[v][2];
+record[v][0]=1;
+//end inset edge
+
+//update record[][]
+for(int i=0;i<MAX;i++)
+{
+if(record[i][0]==0&&record[i][2]>cost[v][i])
+{record[i][1]=v;
+record[i][2]=cost[v][i];
+}
+}
+--num_egde;
+cout<<endl;
+cout<<"======================================="<<endl;
+cout<<"EDGES LEFT "<<num_egde<<endl;
+cout<<"RECORD ARRAY is "<<endl;
+cout<<setw(5)<<"egde"<<setw(5)<<"visit"<<setw(5)<<"from"<<setw(5)<<"distance"<<endl;
+
+    for(int i=0;i<MAX;i++)
+        cout<<setw(5)<<i+1<<setw(5)<<record[i][0]<<setw(5)<<record[i][1]<<setw(5)<<record[i][2]<<endl;
+cout<<"======================================="<<endl;
+//end update
+
+}//end while
+}
+//end prim
+//end graph funcs
+
+int main()
+{
+Graph G12;
+cout<<endl<<"THE GIVEN GRAPH is:"<<endl;
+G12.display(G12.G1);
+cout<<endl<<"THE cost GRAPH is:"<<endl;
+G12.set_cost();
+G12.display(G12.cost);
+cout<<endl<<"THE MST BEFORE is:"<<endl;
+G12.display(G12.MST);
+G12.prim(0);
+cout<<endl<<"THE MST AFTER is:"<<endl;
+G12.display(G12.MST);
+    cout << "Hello world!" << endl;
+    return 0;
+}
+

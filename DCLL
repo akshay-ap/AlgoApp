@@ -1,0 +1,54 @@
+#include <iostream>
+using namespace std;
+class node
+{
+private:
+int data;
+node* next;
+node* pre;
+friend class DCLL;
+
+
+};
+class DCLL
+{
+private:
+node* head;
+public:
+node* get_root();
+void add_at_end(int d);
+void add_at(int pos, int d);
+void del(int d);
+void display();
+
+
+};
+
+//dcll functions
+node* get_root();
+void add_at_end(int d);
+void add_at(int pos, int d);
+void del(int d);
+void DCLL::display()
+{
+node* temp=head;
+if(temp==HEAD)
+{
+
+cout<<temp->data<<endl;
+}
+while(temp!=head)
+{
+cout<<temp->data<<" ";
+temp =temp->next;
+}//end while
+cout<<endl;
+
+}
+//end dcll functions
+
+int main()
+{
+    cout << "Hello world!" << endl;
+    return 0;
+}

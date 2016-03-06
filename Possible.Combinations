@@ -1,0 +1,43 @@
+#include <iostream>
+#include <vector>
+#include<cmath>
+using namespace std;
+void printPowerSet(vector<long long int> set, int set_size);
+int main()
+{
+
+long long int N;
+cin>>N;
+vector<long long int >arr;
+long long int temp;
+for(long long int i=0;i<N;i++)
+{
+cin>>temp;
+arr.push_back(temp);
+}
+printPowerSet(arr,N);
+return 0;
+
+}
+
+void printPowerSet(vector<long long int> set, int set_size)
+{
+    /*set_size of power set of a set with set_size
+      n is (2**n -1)*/
+   long long  int pow_set_size = pow(2, set_size);
+   long long  counter, j;
+
+    /*Run from counter 000..0 to 111..1*/
+    for(counter = 0; counter < pow_set_size; counter++)
+    {
+      for(j = 0; j < set_size; j++)
+       {
+          /* Check if jth bit in the counter is set
+             If set then pront jth element from set */
+          if(counter & (1<<j))
+           cout<<set[j];
+       }
+      cout<<endl;
+    }
+}
+
